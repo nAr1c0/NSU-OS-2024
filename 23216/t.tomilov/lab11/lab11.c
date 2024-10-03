@@ -22,6 +22,6 @@ int main(int argc, char** argv){
     }
     char *envp = "LINES=30";
     execvpe(argv[1], &argv[1], envp);
-    error("ERROR: failed to execvpe!");
+    perror("ERROR: failed to execvpe!");
     exit(EXIT_FAILURE);
 }
