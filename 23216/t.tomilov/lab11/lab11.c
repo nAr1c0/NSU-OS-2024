@@ -10,9 +10,9 @@ int execvpe(char* file, char* argv[], char* envp){
         perror("ERROR: can`t change env!");
         return -1;
     }
-    int res = execvp(file, argv);
+    execvp(file, argv);
     environ = oldEnv;
-    return res;
+    return -1;
 }
 
 int main(int argc, char** argv){
@@ -21,9 +21,7 @@ int main(int argc, char** argv){
         exit(EXIT_FAILURE);
     }
     char *envp = "LINES=30";
-    if (execvpe(argv[1], &argv[1], envp) == -1){
-        perror("ERROR: failde to execvpe!");
-        exit(EXIT_FAILURE);
-    }
-    exit(EXIT_SUCCESS);
+    execvpe(argv[1], &argv[1], envp);
+    error("ERROR: failed to execvpe!");
+    exit(EXIT_FAILURE);
 }
